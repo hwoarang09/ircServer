@@ -3,8 +3,8 @@
 
 #include "IRC.hpp"
 
-class User;
-class Channel;
+class IrcClient;
+class IrcChannel;
 
 class IrcServ
 {
@@ -15,10 +15,14 @@ public:
 private:
     int         _servFd;
     int         _port;
-    sockaddr    _servAddr;
+    int         _fdMax;
+    int         _fdNum;
+    fd_set activeReads, cpyReads;
+    fd_set activeWrites, cpyWrites;
+    struct sockaddr_in    _servAddr;
     std::string _passWord;
-    std::vector <User> users;
-    std::vector <Channel> Channels;
+    std::vector <IrcClient *> clients;
+    std::vector <IrcChannel *> channels;
     
     IrcServ();
     IrcServ(const IrcServ& copy);
