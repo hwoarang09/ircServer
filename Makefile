@@ -1,22 +1,23 @@
 CXX			= c++
-CXXFLAGS	= -Wall -Werror -Wextra
+# CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address
 TARGET		= ircserv
-OBJS		= ./src/$(SRCS:.cpp=.o)
-SRCS 		= IrcServ.cpp
-
-.PHONY : all clean fclean re
-
-%.o : %.c
-	$(CXX) $(CXXFLAGS) $^ -c $(TARGET) 
-
+OBJS		= $(SRCS:.cpp=.o)
+SRCS 		= ./srcs/main.cpp \
+			./srcs/IrcServ.cpp\
+			./srcs/IrcClient.cpp \
+			./srcs/IrcChannel.cpp\
+			./srcs/IRC.cpp
+			  
 $(TARGET) : $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $(TARGET) 
+
+.PHONY : all clean fclean re
 
 all : 
 	$(TARGET)
 
 clean : 
-	@rm -f *.o
+	@rm -f $(OBJS)
 
 fclean : 
 	@make clean
