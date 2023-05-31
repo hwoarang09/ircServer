@@ -59,6 +59,9 @@
         "unordered_map": "cpp",
         "utility": "cpp",
         "vector": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "__tree": "cpp",
+        "map": "cpp",
+        "strstream": "cpp"
     }
 }

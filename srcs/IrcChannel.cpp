@@ -1,5 +1,5 @@
 #include <arpa/inet.h>
-#include "../include/IrcChannel.hpp"
+#include "../include/IRC.hpp"
 
 IrcChannel::IrcChannel(std::string channelName) {
 

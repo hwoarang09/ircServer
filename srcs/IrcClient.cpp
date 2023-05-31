@@ -1,5 +1,5 @@
 #include <arpa/inet.h>
-#include "../include/IrcClient.hpp"
+#include "../include/IRC.hpp"
 
 IrcClient::IrcClient(uint32_t ipAddr, uint16_t portNo) {
 

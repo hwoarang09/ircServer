@@ -1,11 +1,5 @@
-#include "../include/IrcServ.hpp"
+#include "../include/IRC.hpp"
 #include <arpa/inet.h>
-
-void IrcServ::errorHandle(std::string message, int errorNum)
-{
-    std::cout << message << std::endl;
-    exit(errorNum);
-}
 
 IrcServ::IrcServ(int port, std::string passWord)
     : _port(port), _passWord(passWord)
@@ -15,26 +9,27 @@ IrcServ::IrcServ(int port, std::string passWord)
     _servAddr.sin_family = AF_INET;
     _servAddr.sin_addr.s_addr=htonl(INADDR_ANY);
     _servAddr.sin_port=htons(port);
+// setsockopt 추가
     if (_servFd == -1) 
-        errorHandle("socket error", _servFd);
+        ErrorHandle::errorHandle("socket error", _servFd);
     if (bind(_servFd, (struct sockaddr*)&_servAddr, sizeof(_servAddr)))
-        errorHandle("fail bind", -1);
+        ErrorHandle::errorHandle("fail bind", -1);
     if (listen(_servFd, 5))
-        errorHandle("fail listen", -1);
+        ErrorHandle::errorHandle("fail listen", -1);
 
     FD_ZERO(&_activeReads);
     FD_ZERO(&_activeWrites);
-    FD_SET(_servFd, &_activeReads);
-    FD_SET(_servFd, &_activeWrites);
-    _fdMax = _servFd;
 }
 
 void IrcServ::run()
 {
- 
-
     while(true) {
-        /*
+        FD_SET(_servFd, &_activeReads);
+        FD_SET(_servFd, &_activeWrites);
+/*
+        _fdMax = getFdMax();
+        //check
+        select(_fdMax, &_activeReads, &_Activewrite, 0, 0);
         selctc하기위한 이이런런저저런  ㅅ작업을하고
         select
         if(FD_ISSET(serv_fd, read_fds))
@@ -58,3 +53,5 @@ void IrcServ::run()
         break;
     }
 }
+
+IrcServ::~IrcServ() {};
