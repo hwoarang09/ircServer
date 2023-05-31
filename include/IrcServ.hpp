@@ -12,7 +12,10 @@ public:
     IrcServ(int port, std::string passWord);
     void run();
     ~IrcServ();
-
+    int GetMaxFd();
+    void CopyClientFDtoFDSet(fd_set *fdset);
+    void RemoveClients(IrcClient *ircClient);
+    void AddClients(IrcClient *ircClient);
 private:
     int         _servFd;
     int         _port;
@@ -26,8 +29,10 @@ private:
 
     struct sockaddr_in          _servAddr;
     std::string                 _passWord;
-    std::vector <IrcClient>     _clients;
-    std::vector <IrcChannel>    _channels;
+    std::list <IrcClient*>     _clients;//참조를 넣어서 쓰는 법 모르겠음
+                                        //vector는 배열이라서 삭제가 불편함
+                                        //list는 remove로 바로 삭제 가능
+    std::list <IrcChannel*>    _channels;
     
     IrcServ();
     IrcServ(const IrcServ& copy);
