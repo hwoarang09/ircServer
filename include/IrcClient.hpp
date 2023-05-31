@@ -9,20 +9,19 @@ class IrcChannel;
 #define MAX_CLIENT_BUFFER_SIZE 1024
 
 class IrcClient {
-
-    private:
     public:
-        uint32_t ipAddr;
-        uint16_t portNo;
-        uint32_t serverIpAddr;
-        uint16_t serverPortNo;
-        int commFd;
-        
-        std::vector<IrcChannel *> registredChannels;
-        std::vector<IrcChannel *> operatorChannels;
         IrcClient(uint32_t ipAddr, uint16_t portNo);
         void Display();
+
+    private:
+        uint32_t _ipAddr;
+        uint16_t _portNo;
+        uint32_t _serverIpAddr;
+        uint16_t _serverPortNo;
+        int      _commFd;
         
+        std::vector<IrcChannel> _registredChannels;
+        std::vector<IrcChannel> _operatorChannels;        
 } ;
 
 

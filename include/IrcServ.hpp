@@ -17,12 +17,16 @@ private:
     int         _port;
     int         _fdMax;
     int         _fdNum;
-    fd_set activeReads, cpyReads;
-    fd_set activeWrites, cpyWrites;
+
+    fd_set _activeReads;
+    fd_set _activeWrites;
+    fd_set _cpyReads;
+    fd_set _cpyWrites;
+
     struct sockaddr_in    _servAddr;
     std::string _passWord;
-    std::vector <IrcClient *> clients;
-    std::vector <IrcChannel *> channels;
+    std::vector <IrcClient> _clients;
+    std::vector <IrcChannel> _channels;
     
     IrcServ();
     IrcServ(const IrcServ& copy);

@@ -3,7 +3,7 @@
 
 IrcChannel::IrcChannel(std::string channelName) {
 
-    this->channelName = channelName;
+    this->_channelName = channelName;
 }
 
 void

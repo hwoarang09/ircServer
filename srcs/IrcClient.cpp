@@ -3,8 +3,8 @@
 
 IrcClient::IrcClient(uint32_t ipAddr, uint16_t portNo) {
 
-    this->ipAddr = ipAddr;
-    this->portNo = portNo;
+    this->_ipAddr = ipAddr;
+    this->_portNo = portNo;
 }
 
 void

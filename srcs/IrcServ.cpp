@@ -14,7 +14,7 @@ IrcServ::IrcServ(int port, std::string passWord)
     memset(&_servAddr, 0, sizeof(_servAddr));
     _servAddr.sin_family = AF_INET;
     _servAddr.sin_addr.s_addr=htonl(INADDR_ANY);
-    _servAddr.sin_port=htons((port));
+    _servAddr.sin_port=htons(port);
     if (_servFd == -1) 
         errorHandle("socket error", _servFd);
     if (bind(_servFd, (struct sockaddr*)&_servAddr, sizeof(_servAddr)))
@@ -22,10 +22,10 @@ IrcServ::IrcServ(int port, std::string passWord)
     if (listen(_servFd, 5))
         errorHandle("fail listen", -1);
 
-    FD_ZERO(&activeReads);
-    FD_ZERO(&activeWrites);
-    FD_SET(_servFd, &activeReads);
-    FD_SET(_servFd, &activeWrites);
+    FD_ZERO(&_activeReads);
+    FD_ZERO(&_activeWrites);
+    FD_SET(_servFd, &_activeReads);
+    FD_SET(_servFd, &_activeWrites);
     _fdMax = _servFd;
 }
 
