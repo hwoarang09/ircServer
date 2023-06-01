@@ -67,8 +67,15 @@ void IrcServ::run()
              it != this->_clients.end();
              ircClient = nextIrcClient)
              {
-
                 nextIrcClient = *(++it);
+
+
+        /* if i change like this
+            for (it = this->_clients.begin(), ircClient = *it;
+                          it != this->_clients.end();   ++it)
+
+            segfault arise. */
+            
             printf("after for it\n");
 
 
